@@ -1,0 +1,3 @@
+{"message":"Conversion error 'incompatible PDF document'","LOB":"Business Administration","Service":"DocumentService","Process":"AddAttachements","Reason":"Technical","OptionalFields":{"Department":"BPM","CaseNumber":"C12.12343","Step":"Assignment"},"level":"ERROR","thread_name":"main","class":"Log4j2Tests","@timestamp":"2019-07-24 16:33:19.581"}
+message
+message

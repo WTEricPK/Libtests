@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<Configuration status="INFO">-->
+	<!--<Appenders>-->
+		<!--<Console name="console" target="SYSTEM_OUT">-->
+			<!--<PatternLayout-->
+					<!--pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}: %msg%n clientId %X{clientId} namespace %X{namespace} postId %X{postId} padoqName %X{padoqName} authorId %X{authorId} alias %X{alias} action %X{action}" />-->
+		<!--</Console>-->
+	<!--</Appenders>-->
+	<!--<Loggers>-->
+		<!--<Root level="info" additivity="false">-->
+			<!--<AppenderRef ref="console" />-->
+		<!--</Root>-->
+	<!--</Loggers>  [%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1}: %msg -->
+<!--</Configuration>-->
+
+<Configuration status="INFO">
+<Appenders>
+	<Console name="ConsoleJSONAppender" target="SYSTEM_OUT">
+		<!--<PatternLayout	pattern="clientId %X{clientId}, namespace %X{namespace}, postId %X{postId}, padoqName %X{padoqName}, authorId %X{authorId}, alias %X{alias}, action %X{action} %n" />-->
+		<PatternLayout pattern="{&quot;timestamp&quot;: &quot;%d{yyyy-MM-dd HH:mm:ss.SSS}&quot;, &quot;clientId&quot;: &quot;%X{clientId}&quot;, &quot;postId&quot;: &quot;%X{postId}&quot;, &quot;padoqName&quot;: &quot;%X{padoqName}&quot;, &quot;authorId&quot;: &quot;%X{authorId}&quot;, &quot;alias&quot;: &quot;%X{alias}&quot;, &quot;action&quot;: &quot;%X{action}&quot; }  %n" />
+		<!--<JSONLayout compact="true" properties="true" eventEol="true"/>-->
+		<!--<JsonLayout includeStacktrace = "false" endOfBatch = "false">-->
+			<!--<KeyValuePair key="timestamp" value="$${date:yyyy-MM-dd'T'HH:mm:ss.SSSZ}" />-->
+		    <!--<KeyValuePair key="authorId" value="${ctx:authorId}"/>-->
+		    <!--<KeyValuePair key="clientId" value="${ctx:clientId}"/>-->
+		    <!--<KeyValuePair key="namespace" value="${ctx:namespace}"/>-->
+			<!--<KeyValuePair key="postId" value="${ctx:postId}"/>-->
+			<!--<KeyValuePair key="padoqName" value="${ctx:padoqName}"/>-->
+			<!--<KeyValuePair key="alias" value="${ctx:alias}"/>-->
+			<!--<KeyValuePair key="action" value="${ctx:action}"/>-->
+		<!--</JsonLayout>-->
+	</Console>
+
+	<RollingFile name="ConsoleJSONAppender" fileName="target\log-analytics.log" filePattern="$target\log-analytics.log.%d{yyyy-MM-dd}" append="true">
+		<PatternLayout pattern="{&quot;timestamp&quot;: &quot;%d{yyyy-MM-dd HH:mm:ss.SSS}&quot;, &quot;clientId&quot;: &quot;%X{clientId}&quot;, &quot;postId&quot;: &quot;%X{postId}&quot;, &quot;padoqName&quot;: &quot;%X{padoqName}&quot;, &quot;authorId&quot;: &quot;%X{authorId}&quot;, &quot;alias&quot;: &quot;%X{alias}&quot;, &quot;action&quot;: &quot;%X{action}&quot; }  %n" />
+		<Policies>
+			<TimeBasedTriggeringPolicy/>
+		</Policies>
+		<DefaultRolloverStrategy max="3"/>
+	</RollingFile>
+</Appenders>
+	<Loggers>
+		<Logger name="CONSOLE_JSON_APPENDER" level="INFO" additivity="false">
+		<AppenderRef ref="ConsoleJSONAppender" />
+		</Logger>
+	</Loggers>
+</Configuration>
