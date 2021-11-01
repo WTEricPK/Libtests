@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -99,7 +100,8 @@ public class StringManipulation
     public void regex()
     {
         //final String pattern = "^\\w{3,64}$";
-        final String pattern = "^[a-z0-9_]{3,64}$";
+//        final String pattern = "^[a-z0-9_]{3,64}$";
+        final String pattern = "hello";
 
 
         System.out.println(Pattern.matches(pattern, "hello-1"));
@@ -109,6 +111,31 @@ public class StringManipulation
         System.out.println(Pattern.matches(pattern, "Hello"));
 
 
+        Pattern p = Pattern.compile(pattern);
+
+        final String theString = "hello hello hello this is a string.";
+
+        final Matcher m = p.matcher(theString);
+        int i = 0;
+        while(m.find())
+        {
+            System.out.println(String.format("%s for iteration %d", m.group(0), i));
+            i++;
+        }
+
+
+    }
+
+    @Test
+    public void format()
+    {
+        final String s1 = "java";
+        final int x = 10;
+
+        final Integer number = x;
+        final String result = String.format("%-15s", s1) + String.format("%03d", number);
+
+        System.out.println(result);
     }
 
 
@@ -120,6 +147,34 @@ public class StringManipulation
 
         System.out.println(Pattern.matches(pattern, "+447925542274"));
         System.out.println(Pattern.matches(pattern, "07925542274"));
+    }
+
+
+    @Test
+    public void regex3()
+    {
+
+        final String string = "Hello <2021-06-22 13:36:46,073> values wrhae5wjwhhsabtaqv45  <2021-06-22 13:36:46,063>";
+        //final String string = "Hello <2021-06-22 13:36:46,073> values wrhae5wjwhhsabtaqv45";
+
+        Pattern p = Pattern.compile("\\<(.*?)\\>");
+
+        final Matcher matcher = p.matcher(string);
+
+        if(matcher.find())
+        {
+            System.out.println(matcher.group(1));
+            matcher.find();
+            System.out.println(matcher.group(1));
+            System.out.println("Found");
+        }
+        else
+        {
+            System.out.println("Not found");
+        }
+
+
+
     }
 
 
@@ -471,6 +526,22 @@ public class StringManipulation
         //System.out.println(OffsetDateTime.parse("2019-05-31T13:58:25.927+01:00"));
 
     }
+
+
+    @Test
+    public void formateNuber()
+    {
+
+        final Double number = 1000d;
+
+        final String stringNumber = String.format("%03d", 100);
+
+        final Integer stringValue = new Integer(stringNumber);
+
+        System.out.println("String value '" + stringNumber + "' int value '" + stringValue + "'." );
+    }
+
+
 
     @Test
     public void testLocale()

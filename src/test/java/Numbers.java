@@ -13,6 +13,8 @@ import org.junit.Test;
 public class Numbers
 {
 
+    public static int FROG_COUNT = 1;
+
     @Test
     public void bigDecimal()
     {
@@ -22,6 +24,19 @@ public class Numbers
 
         System.out.println(new BigDecimal(decimal.toString()));
     }
+
+    @Test
+    public void changeStaticVariable()
+    {
+
+        for(int i = 0; i < 10; i++)
+        {
+            FROG_COUNT = i +  FROG_COUNT;
+            System.out.println(FROG_COUNT);
+        }
+
+    }
+
 
 
     @Test
